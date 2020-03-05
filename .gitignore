@@ -34,3 +34,7 @@ hs_err_pid*
 *.rej
 *.bak
 .*.swp
+
+# Eclipse
+.project
+.classpath
