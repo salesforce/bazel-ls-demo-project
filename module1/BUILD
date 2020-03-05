@@ -2,7 +2,7 @@ load("@rules_java//java:defs.bzl", "java_binary")
 load("@salesforce_rules_mybuilder//mybuilder:defs.bzl", "mybuilder_gen")
 
 mybuilder_gen(
-	name = "mybuilder_sample_generation",
+    name = "mybuilder_sample_generation",
     srcs = glob(
         ["java/resources/**/*.txt"],
     ),
@@ -17,8 +17,9 @@ java_binary(
         ["java/resources/**/*.txt"],
     ),
     deps = [
-    	"//module2",
-    	"@com_google_guava//jar",
+      "//module2",
+      "//module3",
+      "@com_google_guava//jar",
     ],
     main_class = "hello.Hello",
 )
