@@ -27,4 +27,3 @@ rules_mybuilder_toolchains()
 # Maven dependencies
 load("//third_party/maven:dependencies.bzl", "maven_dependencies")
 maven_dependencies()
-
