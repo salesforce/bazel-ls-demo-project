@@ -1,0 +1,100 @@
+name: CI
+on: push
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Bin-cache-mac
+      uses: actions/cache@v1
+      if: matrix.os == 'macos-latest'
+      id: bin-cache-mac
+      with:
+        path: "bin"
+        key: ${{ runner.os }}-bin-bazel-13873218
+    
+    - name: Bin-cache-linux
+      uses: actions/cache@v1
+      if: matrix.os == 'ubuntu-latest'
+      id: bin-cache-linux
+      with:
+        path: "bin"
+        key: ${{ runner.os }}-bin-bazel-13873218
+    
+    - name: Bin-cache-win
+      uses: actions/cache@v1
+      if: matrix.os == 'windows-latest'
+      id: bin-cache-win
+      with:
+        path: "bin"
+        key: ${{ runner.os }}-bin-bazel-13873218
+
+    - name: Build-cache-mac
+      uses: actions/cache@v1
+      if: matrix.os == 'macos-latest'
+      id: build-cache-mac
+      with:
+        path: "/home/runner/.cache/bazel"
+        key: ${{ runner.os }}-bazel-13873218
+    
+    - name: Build-cache-linux
+      uses: actions/cache@v1
+      if: matrix.os == 'ubuntu-latest'
+      id: build-cache-linux
+      with:
+        path: "/home/runner/.cache/bazel"
+        key: ${{ runner.os }}-bazel-13873218
+    
+    - name: Build-cache-win
+      uses: actions/cache@v1
+      if: matrix.os == 'windows-latest'
+      id: build-cache-win
+      with:
+        path: "/home/runner/.cache/bazel"
+        key: ${{ runner.os }}-bazel-13873218
+    
+    - name: Install bazelisk (Linux)
+      if: steps.bin-cache-linux.outputs.cache-hit != 'true' && matrix.os == 'ubuntu-latest'
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazel/releases/download/3.0.0/bazel-3.0.0-linux-x86_64"
+        mkdir "bin/"
+        mv bazel-3.0.0-linux-x86_64 "bin/bazel"
+        chmod +x "bin/bazel"
+    
+    - name: Install bazelisk (MacOS)
+      if: steps.bin-cache-mac.outputs.cache-hit != 'true' && matrix.os == 'macos-latest'
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazel/releases/download/3.0.0/bazel-3.0.0-darwin-x86_64"
+        mkdir "bin/"
+        mv bazel-3.0.0-darwin-x86_64 "bin/bazel"
+        chmod +x "bin/bazel"
+    
+    - name: Install bazelisk (Windows)
+      if: steps.bin-cache-win.outputs.cache-hit != 'true' && matrix.os == 'windows-latest'
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazel/releases/download/3.0.0/bazel-3.0.0-windows-x86_64.exe"
+        mkdir "bin"
+        move bazel-3.0.0-windows-x86_64.exe "bin\bazel.exe"
+
+    - name: Bazel test (Windows only)
+      if: matrix.os == 'windows-latest'
+      run: bin\bazel.exe test //...
+
+    - name: Bazel test
+      if: matrix.os != 'windows-latest'
+      run: bin/bazel test //...
+
+    - name: Bazel build (Windows only)
+      if: matrix.os == 'windows-latest'
+      run: bin/bazel.exe build //...
+
+    - name: Bazel build
+      if: matrix.os != 'windows-latest'
+      run: bin/bazel build //...
