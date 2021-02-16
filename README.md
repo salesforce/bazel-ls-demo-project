@@ -1,3 +1,6 @@
+![GitHub Actions](https://github.com/salesforce/bazel-ls-demo-project/workflows/CI/badge.svg)
+[![](https://img.shields.io/badge/license-BSD-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 # bazel-ls-demo-project
 
 Demo project for testing and developing the Bazel language server.
