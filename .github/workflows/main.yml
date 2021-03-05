@@ -83,21 +83,22 @@ jobs:
         mkdir "bin"
         move bazel-4.0.0-windows-x86_64.exe "bin\bazel.exe"
 
-    - name: Bazel test small (Windows only)
-      if: matrix.os == 'windows-latest'
-      run: bin\bazel.exe test //...
-
-    - name: Bazel test small
-      if: matrix.os != 'windows-latest'
-      run: ../bin/bazel test //...
-      working-directory: ./small
-
     - name: Bazel build small (Windows only)
       if: matrix.os == 'windows-latest'
-      run: ../bin/bazel.exe build //...
+      run: ..\bin\bazel.exe build //...
+      working-directory: ./small
+
+    - name: Bazel test small (Windows only)
+      if: matrix.os == 'windows-latest'
+      run: ..\bin\bazel.exe test //...
       working-directory: ./small
 
     - name: Bazel build small
       if: matrix.os != 'windows-latest'
       run: ../bin/bazel build //...
+      working-directory: ./small
+
+    - name: Bazel test small
+      if: matrix.os != 'windows-latest'
+      run: ../bin/bazel test //...
       working-directory: ./small
