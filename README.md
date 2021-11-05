@@ -16,4 +16,4 @@ Instead we are starting with a focus on a recommended module structure extremely
 
 You can use the example from the tasks.json file to create VSCode tasks.
 
-The example runs a bazel query and expects a module name from the input area. 
+The example runs a [Bazel Query](https://docs.bazel.build/versions/main/query-how-to.html) and expects a module name from the input area. 
