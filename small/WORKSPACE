@@ -17,8 +17,8 @@ versions.check(minimum_bazel_version= "2.0.0")
 
 http_archive(
     name = "salesforce_rules_mybuilder",
-    url = "https://github.com/salesforce/bazel-java-builder-template/archive/6d7cc260d50225432758d88bea9d7dd332f89352.zip",
-    strip_prefix = "bazel-java-builder-template-6d7cc260d50225432758d88bea9d7dd332f89352"
+    url = "https://github.com/salesforce/bazel-java-builder-template/archive/c443e2391ff547c01f5ca3f14a1e84d85c13d16d.zip",
+    strip_prefix = "bazel-java-builder-template-c443e2391ff547c01f5ca3f14a1e84d85c13d16d"
 )
 
 load("@salesforce_rules_mybuilder//mybuilder:repositories.bzl", "rules_mybuilder_dependencies", "rules_mybuilder_toolchains")

@@ -37,9 +37,8 @@ maven_dependencies(
 # Our sample source code generator
 http_archive(
     name = "salesforce_rules_mybuilder",
-    urls = ["https://github.com/salesforce/bazel-java-builder-template/archive/6d7cc260d50225432758d88bea9d7dd332f89352.zip"],
-    sha256 = "25240d6c55b36333d5e6c1e64d84121a5abf087d962c55dfc1ae3d5c301a70bd",
-    strip_prefix = "bazel-java-builder-template-6d7cc260d50225432758d88bea9d7dd332f89352",
+    urls = ["https://github.com/salesforce/bazel-java-builder-template/archive/c443e2391ff547c01f5ca3f14a1e84d85c13d16d.zip"],
+    strip_prefix = "bazel-java-builder-template-c443e2391ff547c01f5ca3f14a1e84d85c13d16d",
 )
 load("@salesforce_rules_mybuilder//mybuilder:repositories.bzl", "rules_mybuilder_dependencies", "rules_mybuilder_toolchains")
 rules_mybuilder_dependencies()
