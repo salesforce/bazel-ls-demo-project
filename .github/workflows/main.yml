@@ -26,6 +26,6 @@ jobs:
       working-directory: ./small
 
     - name: Run tests (small)
-      run: bazel test //...
+      run: bazel test '//...'
       working-directory: ./small
       shell: bash
